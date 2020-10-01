@@ -47,13 +47,10 @@ bot.on('message', async message => {
             if (houranalytics.length < 12) {
                 message.channel.send(new Discord.MessageEmbed().setTitle(`Not enough data yet. :(`))
             } else {
-                if (houranalytics.length > 12) {
                     while (houranalytics > 12) {
                         houranalytics.pop()
                     }
 
-
-                }
                 const trafficDaily = new QuickChart();
                 const timestamps = []
                 for (let i = 0; i < houranalytics.length; i++) {
