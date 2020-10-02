@@ -14,8 +14,13 @@ setInterval(async function () {
     var today = new Date();
 
     var hour = today.getHours()
-    houranalytics.push(hour + ':00', playerCounts.reduce((a, b) => a + b))
+    houranalytics.push([hour + ':00', playerCounts.reduce((a, b) => a + b)])
 }, 3600000)
+setInterval(function(){
+    while (houranalytics > 12) {
+        houranalytics.pop()
+    }
+},)
 bot.on('ready', () => {
     console.log('Online');
     bot.user.setActivity('p:traffic', {
@@ -47,9 +52,6 @@ bot.on('message', async message => {
             if (houranalytics.length < 12) {
                 message.channel.send(new Discord.MessageEmbed().setTitle(`Not enough data yet. :(`))
             } else {
-                    while (houranalytics > 12) {
-                        houranalytics.pop()
-                    }
 
                 const trafficDaily = new QuickChart();
                 const timestamps = []
