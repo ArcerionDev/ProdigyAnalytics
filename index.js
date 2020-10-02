@@ -14,7 +14,8 @@ setInterval(async function () {
     var today = new Date();
 
     var hour = today.getHours()
-    houranalytics.push([hour + ':00', playerCounts.reduce((a, b) => a + b)])
+    let hourstats = [hour + ':00', playerCounts.reduce((a, b) => a + b)]
+    houranalytics.push(hourstats)
 }, 3600000)
 setInterval(function(){
     while (houranalytics > 12) {
