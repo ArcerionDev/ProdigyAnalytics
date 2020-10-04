@@ -25,8 +25,8 @@ bot.on('ready', () => {
 
 })
 bot.on('message', async message => {
-    if (houranalytics.length > 12) {
-        houranalytics.length = 12
+    while (houranalytics.length > 12) {
+        houranalytics.shift()
     }
     let args = message.content.split(' ')
     switch (args[0]) {
@@ -176,12 +176,40 @@ bot.on('message', async message => {
             const unpopularembed = new Discord.MessageEmbed()
             .setTitle('Here are the current least popular Prodigy worlds.')
             .setDescription('This lists the four worlds that the least people are in.')
-            .addField('<:downvote:690303949475152004> First:',`${minfirst.name}, with a count of ${minfirst.count} people online.`)
-            .addField(':arrow_down_small: Second:',`${minsecond.name}, with a count of ${minsecond.count} people online.`)
-            .addField(':arrow_down: Third:',`${minthird.name}, with a count of ${minthird.count} people online.`)
-            .addField(':arrow_double_down: Fourth:',`${minfourth.name}, with a count of ${minfourth.count} people online.`)
+            .addField(':arrow_double_down: First:',`${minfirst.name}, with a count of ${minfirst.count} people online.`)
+            .addField(':arrow_down: Second:',`${minsecond.name}, with a count of ${minsecond.count} people online.`)
+            .addField(':arrow_down_small: Third:',`${minthird.name}, with a count of ${minthird.count} people online.`)
+            .addField('<:downvote:690303949475152004> Fourth:',`${minfourth.name}, with a count of ${minfourth.count} people online.`)
             message.channel.send(unpopularembed)
             break;
-        }
+            case 'p:help':
+            const helpembed = new Discord.MessageEmbed()
+            .setTitle('Prodigy Analytics')
+            .setThumbnail('https://raw.githubusercontent.com/ArcerionDev/ProdigyAnalytics/master/Noot-1.png')
+            .setDescription('This bot shows various statistics about Prodigy traffic!\nCurrent commands:')
+            .addField('p:help',"HMMM I wonder what this could be oh wait its what you're on now")
+            .addField('p:ping','Pong!')
+            .addField('p:traffic','Gets the current number of people online.')
+            .addField('p:daily','Gets the daily traffic in a graph based off the last 12 hours.')
+            .addField('p:popular','Gets the most popular Prodigy worlds.')
+            .addField('p:unpopular','Gets the least popular Prodigy worlds.')
+            .addField('p:about','Gets info on the bot.')
+            .addField('p:invite','Get a link to invite the bot to your server!.')
+            .setTimestamp()
+            .setFooter(`Requested by ${message.author.tag}.`)
+            message.channel.send(helpembed)
+            break;
+            case 'p:about':
+                const aboutembed = new Discord.MessageEmbed()
+                .setTitle('Prodigy Analytics - About')
+                .setDescription('All commands are made by Arcerion#6713 on Discord and [ArcerionDev](https://github.com/ArcerionDev) on Github. \n[API](https://api.prodigygame.com/multiplayer-api/worlds) provided by [Prodigy Math](https://prodigygame.com/).')
+                .setFooter('This bot is not affilated with the Prodigy Math Game in any way.')
+                message.channel.send(aboutembed)
+           break;
+           case 'p:invite':
+               message.channel.send(new Discord.MessageEmbed().setTitle('Prodigy Analytics - Invite').setDescription('Invite the bot [here](https://discord.com/oauth2/authorize?client_id=760298103889854485&scope=bot&permissions=314432).'))
+            }
+       
+
 })
 bot.login(token)
