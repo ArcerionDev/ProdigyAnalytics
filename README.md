@@ -1,4 +1,4 @@
-﻿# ProdigyAnalytics
+﻿# [NOT FUNCTIONAL ANYMORE] ProdigyAnalytics
 
 ### This is a bot that shows how many people are currently connected to Prodigy
 
